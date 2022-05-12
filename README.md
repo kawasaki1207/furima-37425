@@ -9,39 +9,11 @@
 |first_name        |string |null: false              |
 |last_name_kana    |string |null: false              |
 |first_name_kana   |string |null: false              |
-|birth_year_id     |integer|null: false              |
-|birth_month_id    |integer|null: false              |
-|birth_day_id      |integer|null: false              |
+|birth_date        |date   |null: false              |
 
 ### Association
-- belongs_to :birth_year
-- belongs_to :birth_month
-- belongs_to :birth_day
-
 - has_many :items
-- has_many :orders
-
-
-## birth_year
-- 手動でファイルを作成する。
-- 誕生年を"1930"〜"2017"+"--"から選択できる様にする。
-### Association
-has_many :users
-
-
-## birth_month
-- 手動でファイルを作成する。
-- 誕生月を"1"〜"12"+"--"から選択できる様にする。
-### Association
-has_many :users
-
-
-## birth_day
-- 手動でファイルを作成する。
-- 誕生日を"1"〜"31"+"--"から選択できる様にする。
-### Association
-has_many :users
-
+- has_many :buyer
 
 
 
@@ -57,8 +29,7 @@ has_many :users
 |source_id         |integer   |null: false                   |
 |shopping_days_id  |integer   |null: false                   |
 |price             |integer   |null: false                   |
-|sell_user         |references|null: false, foreign_key: true|
-|buy_user          |references|null: false, foreign_key: true|
+|user_id           |references|null: false, foreign_key: true|
 
 ### Association
 - belongs_to :category
@@ -111,20 +82,33 @@ has_many :items
 |Column        |Type   |Options    |
 |--------------|-------|-----------|
 |post_code     |string |null: false|
-|prefectures_id|integer|null: false|
 |city          |string |null: false|
 |address       |string |null: false|
 |building      |string |           |
-|tel           |integer|null: false|
+|tel           |string |null: false|
+|prefectures_id|integer|null: false|
 
 ### Association
 - belongs_to :prefectures
 
-- belongs_to :users
 - belongs_to :items
+- has_one :buyer
+
 
 ## prefectures
 - 手動でファイルを作成する。
 - 47都道府県+"--"から選択できる様にする。
 ### Association
 has_many :orders
+
+
+## buyer
+
+|Column            |Type      |Options                       |
+|------------------|----------|------------------------------|
+|user_id           |references|null: false, foreign_key: true|
+|orders_id|        |references|null: false, foreign_key: true|
+
+### Association
+- belongs_to :users
+- belongs_to :orders
