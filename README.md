@@ -13,7 +13,7 @@
 
 ### Association
 - has_many :items
-- has_many :buyer
+- has_many :buyers
 
 
 
@@ -26,20 +26,20 @@
 |category_id       |integer   |null: false                   |
 |status_id         |integer   |null: false                   |
 |delivery_charge_id|integer   |null: false                   |
-|source_id         |integer   |null: false                   |
-|shopping_days_id  |integer   |null: false                   |
+|prefecture_id     |integer   |null: false                   |
+|shopping_day_id   |integer   |null: false                   |
 |price             |integer   |null: false                   |
-|user_id           |references|null: false, foreign_key: true|
+|user              |references|null: false, foreign_key: true|
 
 ### Association
 - belongs_to :category
 - belongs_to :status
 - belongs_to :delivery_charge
-- belongs_to :source
-- belongs_to :shopping_days
+- belongs_to :prefecture
+- belongs_to :shopping_day
 
-- belongs_to :users
-- has_one :orders
+- belongs_to :user
+- has_one :order
 
 ## category
 - 手動でファイルを作成する。
@@ -79,36 +79,29 @@ has_many :items
 
 ## orders
 
-|Column        |Type   |Options    |
-|--------------|-------|-----------|
-|post_code     |string |null: false|
-|city          |string |null: false|
-|address       |string |null: false|
-|building      |string |           |
-|tel           |string |null: false|
-|prefectures_id|integer|null: false|
+|Column        |Type      |Options                       |
+|--------------|----------|------------------------------|
+|post_code     |string    |null: false                   |
+|city          |string    |null: false                   |
+|address       |string    |null: false                   |
+|building      |string    |                              |
+|tel           |string    |null: false                   |
+|prefectures_id|integer   |null: false                   |
+|buyer         |references|null: false, foreign_key: true|
 
 ### Association
-- belongs_to :prefectures
-
-- belongs_to :items
 - has_one :buyer
-
-
-## prefectures
-- 手動でファイルを作成する。
-- 47都道府県+"--"から選択できる様にする。
-### Association
-has_many :orders
+- has_one :item
 
 
 ## buyer
 
 |Column            |Type      |Options                       |
 |------------------|----------|------------------------------|
-|user_id           |references|null: false, foreign_key: true|
-|orders_id|        |references|null: false, foreign_key: true|
+|user              |references|null: false, foreign_key: true|
+|item              |references|null: false, foreign_key: true|
 
 ### Association
-- belongs_to :users
-- belongs_to :orders
+- belongs_to :user
+- belongs_to :item
+- has_one :order
