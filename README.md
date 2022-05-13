@@ -39,7 +39,7 @@
 - belongs_to :shopping_day
 
 - belongs_to :user
-- has_one :order
+- has_one :buyer
 
 ## category
 - 手動でファイルを作成する。
@@ -90,11 +90,11 @@ has_many :items
 |buyer         |references|null: false, foreign_key: true|
 
 ### Association
-- has_one :buyer
-- has_one :item
+- belongs_to :buyer
 
 
-## buyer
+
+## buyers
 
 |Column            |Type      |Options                       |
 |------------------|----------|------------------------------|
