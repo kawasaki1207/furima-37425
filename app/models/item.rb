@@ -9,7 +9,7 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :shopping_day
 
-  validates :neme, presence: true
+  validates :name, presence: true
   validates :content, presence: true
 
   with_options numericality: { other_than: 0 } do
