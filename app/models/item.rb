@@ -1,6 +1,7 @@
 class Item < ApplicationRecord
 
   belongs_to :user
+  has_one_attached :image
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
@@ -20,5 +21,6 @@ class Item < ApplicationRecord
     validates :shopping_day_id
   end
 
-  validates :price, presence: true
+  validates :price, presence: true, inclusion: { in: (300..9999999)}, numericality: { only_integer: true }, format: { with: /\A[0-9]+\z/ }
+  validates :image, presence: true
 end
