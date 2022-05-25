@@ -13,7 +13,7 @@ class Item < ApplicationRecord
   validates :name, presence: true
   validates :content, presence: true
 
-  with_options numericality: { other_than: 0 } do
+  with_options numericality: { message: "can't be blank" } do
     validates :category_id
     validates :status_id
     validates :delivery_charge_id
