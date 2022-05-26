@@ -12,7 +12,7 @@ class Item < ApplicationRecord
   validates :name, presence: true
   validates :content, presence: true
 
-  with_options numericality: { message: "can't be blank" } do
+  with_options numericality: { other_than: 0, message: "can't be blank" } do
     validates :category_id
     validates :status_id
     validates :delivery_charge_id
@@ -20,7 +20,7 @@ class Item < ApplicationRecord
     validates :shopping_day_id
   end
 
-  validates :price, presence: true, inclusion: { in: (300..9_999_999) }, numericality: { only_integer: true },
-                    format: { with: /\A[0-9]+\z/ }
+  validates :price, presence: true, inclusion: { in: (300..9_999_999) }, numericality: { only_integer: true }
+
   validates :image, presence: true
 end
