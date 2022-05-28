@@ -34,6 +34,7 @@ class ItemsController < ApplicationController
       render :edit
     end
   end
+
   private
 
   def item_params
@@ -46,10 +47,6 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    unless current_user.id == @item.user_id
-      redirect_to action: :index
-    end
+    redirect_to action: :index unless current_user.id == @item.user_id
   end
-
-
 end
