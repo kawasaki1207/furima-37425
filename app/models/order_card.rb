@@ -15,6 +15,6 @@ class OrderCard
   validates :token, presence: true
 
   def save
-    
+    order = Order.create(post_code: post_code, city: city, address: address, building: building, tel: tel,prefecture_id: prefecture_id, buyer: buyer)
   end
 end
