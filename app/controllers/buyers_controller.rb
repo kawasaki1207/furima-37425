@@ -1,13 +1,19 @@
 class BuyersController < ApplicationController
   def index
-    @buyer = Buyer.new
     @item = Item.find(params[:item_id])
-    
-  end
-
-  def new
   end
 
   def create
+    @buyer = Buyer.new(buyer_params)
+   if @buyer.save
+     redirect_to root_path
+   else
+     render :index
+   end
+  end
+
+  private
+  def buyer_params
+    params.require(:buyer).permit(item_id: [], user_id:[])
   end
 end
