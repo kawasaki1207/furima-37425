@@ -5,7 +5,7 @@ class BuyersController < ApplicationController
   end
 
   def create
-    binding.pry
+    @item = Item.find(params[:item_id])
     @order_card = OrderCard.new(buyer_params)
     if @order_card.valid?
       pay_item

@@ -16,7 +16,7 @@ class OrderCard
 
 
   def save
-    byuer = Buyer.create(item_id: item_id, user_id: user_id)
-    Address.create(post_code: post_code, city: city, address: address, building: building, tel: tel, prefecture_id: prefecture_id, byuer_id: byuer.id, token: token)
+    buyer = Buyer.create(item_id: item_id, user_id: user_id)
+    Order.create(post_code: post_code, city: city, address: address, building: building, tel: tel, prefecture_id: prefecture_id, buyer_id: buyer.id)
   end
 end
