@@ -1,7 +1,7 @@
 class BuyersController < ApplicationController
   before_action :authenticate_user!, only: [:index]
   before_action :move_to_index, only: [:index]
-  
+
   def index
     @item = Item.find(params[:item_id])
     @order_card = OrderCard.new
@@ -21,13 +21,13 @@ class BuyersController < ApplicationController
 
   private
 
-
   def buyer_params
-    params.require(:order_card).permit(:post_code, :city, :address, :building, :tel, :prefecture_id).merge(token: params[:token], user_id: current_user.id, item_id: params[:item_id])
+    params.require(:order_card).permit(:post_code, :city, :address, :building, :tel, :prefecture_id).merge(token: params[:token],
+                                                                                                           user_id: current_user.id, item_id: params[:item_id])
   end
 
   def pay_item
-    Payjp.api_key =  ENV["PAYJP_SECRET_KEY"]
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
       amount: @item.price,
       card: buyer_params[:token],
