@@ -5,6 +5,7 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.all.order('created_at DESC')
+    @buyers = Buyer.all
   end
 
   def new
@@ -21,9 +22,14 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @buyer = Buyer.all
   end
 
   def edit
+    if current_user.id == @item.user_id && @item.buyer.nil?
+    else
+      redirect_to root_path
+    end
   end
 
   def update

@@ -86,7 +86,7 @@ has_many :items
 |address       |string    |null: false                   |
 |building      |string    |                              |
 |tel           |string    |null: false                   |
-|prefecture_id|integer   |null: false                   |
+|prefecture_id |integer   |null: false                   |
 |buyer         |references|null: false, foreign_key: true|
 
 ### Association
