@@ -1,14 +1,13 @@
 class BuyersController < ApplicationController
   before_action :authenticate_user!, only: [:index]
   before_action :move_to_index, only: [:index]
+  before_action :set_item, only: [:index, :create]
 
   def index
-    @item = Item.find(params[:item_id])
     @order_card = OrderCard.new
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @order_card = OrderCard.new(buyer_params)
     if @order_card.valid?
       pay_item
@@ -36,7 +35,10 @@ class BuyersController < ApplicationController
   end
 
   def move_to_index
-    @item = Item.find(params[:item_id])
     redirect_to controller: :items, action: :index if current_user.id == @item.user_id || @item.buyer.present?
+  end
+
+  def set_item
+    @item = Item.find(params[:item_id])
   end
 end

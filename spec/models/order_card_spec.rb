@@ -1,11 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe OrderCard, type: :model do
-  before do
-    @order_card = FactoryBot.build(:order_card)
-  end
-
   describe '商品購入' do
+    before do
+      @user = FactoryBot.create(:user)
+      @item = FactoryBot.create(:item)
+      @order_card = FactoryBot.build(:order_card, user_id: @user.id, item_id: @item.id)
+      sleep 0.1
+    end
+
     context '商品購入できる場合' do
       it '全ての項目に値が存在すれば購入できる' do
         expect(@order_card).to be_valid
@@ -74,6 +77,12 @@ RSpec.describe OrderCard, type: :model do
       end
       it 'telが11桁以上だと購入できない' do
         @order_card.tel = '123456789100'
+        @order_card.valid?
+        expect(@order_card.errors.full_messages).to include 'Tel is invalid'
+      end
+
+      it 'telが全角だと購入できない' do
+        @order_card.tel = '１２３４５６７８９０'
         @order_card.valid?
         expect(@order_card.errors.full_messages).to include 'Tel is invalid'
       end

@@ -7,7 +7,5 @@ FactoryBot.define do
     tel           { Faker::Number.decimal_part(digits: 11) }
     prefecture_id { Faker::Number.within(range: 1..47) }
     token         { 'tok_abcdefghijk00000000000000000' }
-    user_id       { Faker::Number.non_zero_digit }
-    item_id       { Faker::Number.non_zero_digit }
   end
 end
