@@ -1,7 +1,7 @@
 class BuyersController < ApplicationController
   before_action :authenticate_user!, only: [:index]
-  before_action :move_to_index, only: [:index]
   before_action :set_item, only: [:index, :create]
+  before_action :move_to_index, only: [:index]
 
   def index
     @order_card = OrderCard.new
@@ -35,7 +35,7 @@ class BuyersController < ApplicationController
   end
 
   def move_to_index
-    redirect_to controller: :items, action: :index if current_user.id == @item.user_id || @item.buyer.present?
+    redirect_to root_path if current_user.id == @item.user_id || @item.buyer.present?
   end
 
   def set_item
